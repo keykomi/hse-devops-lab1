@@ -1,8 +1,10 @@
 import datetime
 
+
 def calculate_age(born):
     today = datetime.date.today()
     return today.year - born.year - ((today.month, today.day) < (born.month, born.day))
+
 
 surname, name, patronymic = input("Введите ФИО через пробел: ").split()
 birth_date = input("Введите дату рождения в формате дд.мм.гггг: ")
