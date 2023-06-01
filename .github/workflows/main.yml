@@ -69,4 +69,3 @@ jobs:
            strict: low
            mypy-options: "--ignore-missing-imports --show-error-codes"
            pylint-options: "--rcfile=setup.cfg"
-           django: true
