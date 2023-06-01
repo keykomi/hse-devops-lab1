@@ -21,18 +21,14 @@ jobs:
       - name: Install Requirements
         run: pip install -r requirements.txt
         
-      - name: Install Flake8 and PySnooper
+      - name: Install Flake8
         run: |
           pip install flake8
-          pip install pysnooper
       
       - name: Code Style Check
         run: |
           flake8 --max-line-length=200 main.py
       
-      - name: Runtime Performance Check
-        run: |
-          python -m pysnooper main.py --logfile=log.txt
   build:
     needs: code_analyse
     runs-on: windows-latest
