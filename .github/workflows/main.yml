@@ -33,3 +33,11 @@ jobs:
         with:
           name: exe
           path: build/main.exe
+          
+      - name: Send Telegram message
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.TELEGRAM_TO}}
+          token: ${{ secrets.TELEGRAM_TOKEN}}
+          message: uploaded artifacts
+          document: exe
