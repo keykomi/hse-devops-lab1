@@ -57,3 +57,16 @@ jobs:
           token: ${{ secrets.TELEGRAM_TOKEN}}
           message: uploaded artifacts
           document: main.7z
+  linter:
+    needs: send_message
+    runs-on: ubuntu-latest
+  
+    steps:
+       - uses: actions/checkout@v2  
+       - name: Python Linter
+         uses: sunnysid3up/python-linter@master
+         with:
+           source: "src"
+           mypy-options: "--ignore-missing-imports --show-error-codes"
+           pylint-options: "--rcfile=setup.cfg"
+           django: true
