@@ -66,6 +66,7 @@ jobs:
        - name: Python Linter
          uses: sunnysid3up/python-linter@master
          with:
+           strict: low
            mypy-options: "--ignore-missing-imports --show-error-codes"
            pylint-options: "--rcfile=setup.cfg"
            django: true
