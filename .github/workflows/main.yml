@@ -40,6 +40,8 @@ jobs:
     steps:
       - name: Download a Build Artifact
         uses: actions/download-artifact@v3
+        with:
+          name: exe
       
       - name: Send Telegram message
         uses: appleboy/telegram-action@master
@@ -47,4 +49,4 @@ jobs:
           to: ${{ secrets.TELEGRAM_TO}}
           token: ${{ secrets.TELEGRAM_TOKEN}}
           message: uploaded artifacts
-          document: main.py
+          document: exe.zip
