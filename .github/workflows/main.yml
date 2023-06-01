@@ -34,6 +34,7 @@ jobs:
           name: exe
           path: build/main.exe
   send_message:
+    needs: build
     runs-on: ubuntu-latest
     
     steps:
