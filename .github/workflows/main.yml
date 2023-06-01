@@ -34,6 +34,17 @@ jobs:
     runs-on: windows-latest
     
     steps:
+      - name: Repository
+        uses: actions/checkout@v2
+        
+      - name: Setup Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.9
+      
+      - name: Install Requirements
+        run: pip install -r requirements.txt
+        
       - name: Build Application
         uses: Nuitka/Nuitka-Action@main
         with:
@@ -46,6 +57,7 @@ jobs:
         with:
           name: exe
           path: build/main.exe
+          
   send_message:
     needs: build
     runs-on: ubuntu-latest
