@@ -6,21 +6,38 @@ on:
       - main
       
 jobs:
-  build:
+  code_analyse:
     runs-on: windows-latest
     
     steps:
-      - name: Checkout Repository
+      - name: Repository
         uses: actions/checkout@v2
         
-      - name: Set up Python
+      - name: Setup Python
         uses: actions/setup-python@v2
         with:
           python-version: 3.9
       
-      - name: Install Dependencies
+      - name: Install Requirements
         run: pip install -r requirements.txt
         
+      - name: Install Flake8 and PySnooper
+        run: |
+          pip install flake8
+          pip install pysnooper
+      
+      - name: Code Style Check
+        run: |
+          flake8 main.py
+      
+      - name: Runtime Performance Check
+        run: |
+          python -m pysnooper main.py
+  build:
+    needs: code_analyse
+    runs-on: windows-latest
+    
+    steps:
       - name: Build Application
         uses: Nuitka/Nuitka-Action@main
         with:
@@ -57,15 +74,3 @@ jobs:
           token: ${{ secrets.TELEGRAM_TOKEN}}
           message: uploaded artifacts
           document: main.7z
-  linter:
-    needs: send_message
-    runs-on: ubuntu-latest
-  
-    steps:
-       - uses: actions/checkout@v2  
-       - name: Python Linter
-         uses: sunnysid3up/python-linter@master
-         with:
-           strict: low
-           mypy-options: "--ignore-missing-imports --show-error-codes"
-           pylint-options: "--rcfile=setup.cfg"
