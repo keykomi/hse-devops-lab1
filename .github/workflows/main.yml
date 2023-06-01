@@ -43,6 +43,10 @@ jobs:
         with:
           name: exe
           
+      - name: Arhive
+        run: |
+         7z a main.7z main.exe
+          
       - name: ls 
         run: ls -la 
       
@@ -52,4 +56,4 @@ jobs:
           to: ${{ secrets.TELEGRAM_TO}}
           token: ${{ secrets.TELEGRAM_TOKEN}}
           message: uploaded artifacts
-          document: ./build/main.exe
+          document: main.7z
