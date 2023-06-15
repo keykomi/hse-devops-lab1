@@ -1,7 +1,10 @@
-name: DevopsLab1
+name: DevopsLab1and2
 
 on:
   push:
+    branches:
+      - main
+  pull_request:
     branches:
       - main
       
